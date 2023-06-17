@@ -1,0 +1,38 @@
+.container {
+  align-items: center;
+  color: black;
+}
+
+.wrapper {
+  margin-top: px;
+  display: flex;
+  align-items: center;
+}
+
+.vline {
+  border-left: 1px solid #7B7FDA;
+  height: 580px;
+}
+
+.w-left {
+  margin: 20px;
+  width: 900px;
+  height: 500px;
+  /* background-color: #f7bff2; */
+  border-radius: 15px;
+  padding: 15px;
+  color: white;
+}
+
+.w-right {
+  grid-template-columns: 1fr;
+  width: 400px;
+  margin: 20px;
+  height: 450px;
+  /* background-color: aquamarine; */
+  padding: 40px;
+  color: white;
+}
+
+.address{
+}

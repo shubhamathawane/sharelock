@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 
-const Display = ({ contract, account }) => {
+const Display = ({ contract, account, setOpenData }) => {
   const [data, setData] = useState("");
+
+  const style = {
+    float: "left",
+    width: "100px",
+    height: "100px",
+    objectFit: "cover",
+    padding: "10px",
+  };
 
   const getData = async () => {
     let dataArray;
-    const otherAddress = document.querySelector(".address").value;
+    const otherAddress = document.querySelector("#emails").value;
     try {
       if (otherAddress) {
         dataArray = await contract.display(otherAddress);
@@ -14,7 +22,7 @@ const Display = ({ contract, account }) => {
         dataArray = await contract.display(account);
       }
     } catch (e) {
-      alert("You don't have access!");
+      console.log("You don't have access!");
     }
 
     const isEmpty = Object.keys(dataArray).length === 0;
@@ -27,7 +35,13 @@ const Display = ({ contract, account }) => {
       const images = str_array.map((item, i) => {
         return (
           <a href={item} key={i} target="_blank">
-            <img key={i} src={item} alt="new" className="image-list"></img>
+            <img
+              style={style}
+              key={i}
+              src={item}
+              alt="new"
+              className="image-list"
+            ></img>
           </a>
         );
       });
@@ -39,14 +53,22 @@ const Display = ({ contract, account }) => {
   return (
     <>
       <div className="image-list">
-        <hr />
-        <h2>Images</h2>
-        <hr />
-        {data}
-        <hr />
-        <input type="text" placeholder="Enter Address" className="address" />
         <br />
-        <button className="center button" onClick={getData}>
+        {/* <button onClick={() => setOpenData(false)}>X</button> */}
+        <hr />
+        <h2>
+          Images <button onClick={() => setOpenData(false)}> Back </button>
+        </h2>
+        <hr />
+        <div className="data">{data}</div>
+        <input
+          type="text"
+          placeholder="Enter Address"
+          id="emails"
+          className="input-get"
+        />
+        <br />
+        <button className="get-data btn" onClick={getData}>
           Get Data
         </button>
       </div>

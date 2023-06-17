@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 
-const Modal = ({ contract, setModalOpen }) => {
+const Modal = ({ contract, setOpenShare }) => {
   const Sharing = async () => {
-    const address = document.querySelector(".address").value;
+    const address = document.querySelector(".inputAddr").value;
     await contract.allow(address);
     console.log("Shared");
   };
+
   useEffect(() => {
     const accessList = async () => {
       const addressLists = await contract.shareAccess();
@@ -27,30 +28,34 @@ const Modal = ({ contract, setModalOpen }) => {
     <>
       <div className="modalBackground">
         <div className="modalContainer">
-          <div className="title"> share with</div>
+          <div className="title"> Share with ✔</div>
           <div className="body">
             <input
               type="text"
-              className="address"
+              className="inputAddr"
               placeholder="Enter Address"
             />
             <form action="" id="myForm">
               <select name="" id="selectNumber">
-                <option value="" className="address">
-                  Poeple with Access
+                <option value="" className="addresss">
+                  Peoples with Access
                 </option>
               </select>
             </form>
             <div className="footer">
               <button
                 onClick={() => {
-                  setModalOpen(false);
+                  // setModalOpen(false);
+                  setOpenShare(false);
                 }}
                 id="cancelBtn"
+                className="btn"
               >
                 Cancel
               </button>
-              <button onClick={() => Sharing()}>Sharing</button>
+              <button className="sharing btn" onClick={() => Sharing()}>
+                Share
+              </button>
             </div>
           </div>
         </div>

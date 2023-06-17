@@ -1,0 +1,25 @@
+.aboutContainer {
+  /* background-color: green; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: -moz-element("");
+}
+
+.aboutSection {
+  margin: 10px;
+  color:white;
+  width: 900px;
+  height: 470px;
+  padding: 50px;
+  text-align: center;
+  /* background-color: #7b7c7c; */
+  border-radius: 16px;
+  color:darkcyan;
+}
+
+.aboutSection .head {
+  font-size: 30px;
+  color: #7b7fda;
+  font-weight: bold;
+}

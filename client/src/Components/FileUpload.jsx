@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../Components/FileUpload.css";
+import uploadIcon from "../Image/upload.png";
 
-const FileUpload = ({ contract, account, provider }) => {
+const FileUpload = ({ contract, account, setOpenFile }) => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("No file Selected");
 
@@ -50,23 +52,38 @@ const FileUpload = ({ contract, account, provider }) => {
 
   return (
     <div className="top">
-      <form action="" className="form" onSubmit={handleSubmit}>
-        <label htmlFor="file-upload" className="choose">
-          Choose Image :
-          <input
-            disabled={!account}
-            type="file"
-            id="file-upload"
-            name="data"
-            onChange={retrieveFile}
-          />
-          <br />
-          <span className="textArea">Image : {fileName}</span>
-          <br />
-          <button type="submit" className="upload" disabled={!file}>
-            Upload
-          </button>
+      <form action="" className="forms" onSubmit={handleSubmit}>
+        <label className="header" htmlFor="">
+          Upload Your Files
         </label>
+        <div className="drag-area">
+          <label htmlFor="file-upload" className="choose">
+            <img className="icon btn" src={uploadIcon} alt="Upload file " />
+            <div className="form-inside">
+              <input
+                disabled={!account}
+                type="file"
+                id="file-upload"
+                name="data"
+                hidden
+                onChange={retrieveFile}
+              />
+            </div>
+            <br />
+            <div>
+              <span className="textArea"> <strong className="head"  style={{color:"#7b7fda"}}>Image</strong>  : {fileName}</span>
+              <br />
+              <span className="support">Supports: JPEG, JPG, PNG</span>
+              <br />
+              <button type="submit" className="upload btn" disabled={!file}>
+                Upload
+              </button>
+              <button className="btn cancel" onClick={() => setOpenFile(false)}>
+                Cancel
+              </button>
+            </div>
+          </label>
+        </div>
       </form>
     </div>
   );

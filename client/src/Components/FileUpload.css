@@ -1,0 +1,80 @@
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: --gray;
+}
+#file-upload{
+    border: none;
+    background-color: white;
+    width: 300px;
+    margin-left: 20px;
+}
+
+.icon{
+    width: 40%;
+    height: 16%;
+    margin-left: 47px;
+    margin-top: 40px;
+}
+
+
+
+.upload{
+    border: none;
+    background-color: transparent;
+    color: black;
+    width: 70px;
+    border: 1px solid green;
+    margin: 10px;
+    border-radius: 3px;
+    font-size: 1rem;
+    color: green;
+}
+
+.cancel{
+    border: none;
+    background-color: transparent;
+    color: #d32f2f;
+    width: 70px;
+    border: 1px solid #d32f2f;
+    border-radius: 3px;
+    font-size: 1rem;
+}
+
+.upload:active{
+    opacity: 75%;
+}
+
+.forms{
+    max-width: 650px;
+    width: 100%;
+    padding: 30px;
+    background-color: rgb(240, 247, 252);
+    border-radius: 20px;
+    box-shadow: rgba(149, 157, 165, 0) 0px 8px 24px;
+}
+
+.drag-area{
+    height: 400px;
+    border: 3px dashed #dad3ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.drag-area .support{
+    font-size: 12px;
+    color: gray;
+    margin: 10px 0 15px 0;
+}
+
+.top .header{
+    margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: bold;
+    color:gray;
+}   

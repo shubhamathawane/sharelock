@@ -1,2 +1,2 @@
-to start local blockchain : npx hardhat run --new localhost scripts
 start hardhat server : npx hardhat node
+to start local blockchain : npx hardhat run --network localhost scripts/deploy.js
