@@ -1,78 +1,111 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Display = ({ contract, account, setOpenData }) => {
   const [data, setData] = useState("");
+  const [email, setEmail] = useState("");
 
-  const style = {
-    float: "left",
-    width: "100px",
-    height: "100px",
-    objectFit: "cover",
-    padding: "10px",
+  const getFileFormatIcon = (fileExtension) => {
+    const iconMappings = {
+      pdf: "file-pdf",
+      doc: "file-word",
+      docx: "file-word",
+      txt: "file-alt",
+      // Add more mappings as needed
+    };
+
+    const defaultIcon = "file";
+    const lowerCaseExtension = fileExtension ? fileExtension.toLowerCase() : ""; // Ensure fileExtension is defined
+
+    return iconMappings[lowerCaseExtension] || defaultIcon;
+  };
+
+  const getFileExtension = (fileName) => {
+    const lastDotIndex = fileName.lastIndexOf(".");
+    return lastDotIndex !== -1
+      ? fileName.substring(lastDotIndex + 1).toLowerCase()
+      : "";
+  };
+
+  const isImageFile = (fileExtension) => {
+    const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "jfif"]; // Add more image extensions as needed
+    return imageExtensions.includes(fileExtension);
   };
 
   const getData = async () => {
-    let dataArray;
-    const otherAddress = document.querySelector("#emails").value;
     try {
-      if (otherAddress) {
-        dataArray = await contract.display(otherAddress);
-        console.log(dataArray);
+      let dataArray;
+      if (email) {
+        dataArray = await contract.display(email);
       } else {
         dataArray = await contract.display(account);
       }
-    } catch (e) {
-      console.log("You don't have access!");
-    }
 
-    const isEmpty = Object.keys(dataArray).length === 0;
+      if (dataArray.length > 0) {
+        const files = dataArray.map((item) => {
+          const fileExtension = getFileExtension(item.name);
 
-    if (!isEmpty) {
-      const str = dataArray.toString();
-      const str_array = str.split(",");
-      // console.log(str);
-      // console.log(str_array);
-      const images = str_array.map((item, i) => {
-        return (
-          <a href={item} key={i} target="_blank">
-            <img
-              style={style}
-              key={i}
-              src={item}
-              alt="new"
-              className="image-list"
-            ></img>
-          </a>
-        );
-      });
-      setData(images);
-    } else {
-      alert("No image to Display");
+          return (
+            <div className="col-md-3 mb-4" key={item.url}>
+              <div className="card">
+                <Link
+                  to={`/file/${item.url.substring(
+                    item.url.lastIndexOf("/") + 1
+                  )}`}
+                >
+                  {isImageFile(fileExtension) ? (
+                    <img
+                      className="card-img-top "
+                      src={item.url}
+                      alt={item.name}
+                      style={{ height: "150px", objectFit: "cover" }}
+                    />
+                  ) : (
+                    <i
+                      style={{ objectFit: "cover" }}
+                      className={`fas fa-${getFileFormatIcon(
+                        fileExtension
+                      )} fa-5x mt-3 text-muted d-flex justify-content-around`}
+                    ></i>
+                  )}
+                </Link>
+                <div className="card-body">
+                  <p className="card-text">{item.name}</p>
+                </div>
+              </div>
+            </div>
+          );
+        });
+        setData(files);
+      } else {
+        setData(<p>No file to display</p>);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
     }
   };
+
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]); // Empty dependency array to run the effect only once
+
   return (
-    <>
-      <div className="image-list">
-        <br />
-        {/* <button onClick={() => setOpenData(false)}>X</button> */}
-        <hr />
-        <h2>
-          Images <button onClick={() => setOpenData(false)}> Back </button>
-        </h2>
-        <hr />
-        <div className="data">{data}</div>
+    <div className="container mt-4">
+      <div className="d-flex">
         <input
           type="text"
           placeholder="Enter Address"
           id="emails"
-          className="input-get"
+          onChange={(e) => setEmail(e.target.value)}
+          className="form-control "
         />
-        <br />
-        <button className="get-data btn" onClick={getData}>
-          Get Data
+        <button className="btn btn-outline-primary ml-2 ms-3" onClick={getData}>
+          Fetch Data
         </button>
       </div>
-    </>
+      <div className="row mt-3">{data}</div>
+    </div>
   );
 };
 

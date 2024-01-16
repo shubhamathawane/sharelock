@@ -30,7 +30,7 @@ const NavBar = () => {
     &:hover {
       background-color: #67bc98;
       color: white;
-      border-radius:10px;
+      border-radius: 10px;
     }
   `;
 
@@ -79,17 +79,18 @@ const NavBar = () => {
   `;
 
   return (
-    <Nav>
-      <Logo href="">
-        Share<span>Lock</span>
-      </Logo>
-      <Hamburger onClick={() => setIsOpen(!isOpen)}>
-        <span />
-        <span />
-        <span />
-      </Hamburger>
-      <Menu isOpen={isOpen}>
-        {/* <Button
+    <div className="pb-5">
+      <Nav className="">
+        <Logo href="">
+          Share<span>Lock</span>
+        </Logo>
+        <Hamburger onClick={() => setIsOpen(!isOpen)}>
+          <span />
+          <span />
+          <span />
+        </Hamburger>
+        <Menu isOpen={isOpen}>
+          {/* <Button
           title="change Theme"
           onClick={() => setDarkMode(!darkMode)}
           variant="outlined"
@@ -102,12 +103,14 @@ const NavBar = () => {
           )}
         </Button> */}
 
-        <Slink to="/">Home</Slink>
-        <Slink to="/code">Code Share</Slink>
-        <Slink to="/about">About</Slink>
-        <Slink to="">Contact</Slink>
-      </Menu>
-    </Nav>
+          <Slink to="/">Home</Slink>
+          <Slink to="/code">Share Docs</Slink>
+          <Slink to="/chat">Chat</Slink>
+          <Slink to="">Contact</Slink>
+          <Slink to="/about">About</  Slink>
+        </Menu>
+      </Nav>
+    </div>
   );
 };
 
