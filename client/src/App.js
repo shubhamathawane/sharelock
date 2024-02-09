@@ -1,15 +1,20 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
-
 import Display from "./Components/Display";
 import Modal from "./Components/Modal";
 import upload from "./artifacts/contracts/Upload.sol/Upload.json";
 import { ethers } from "ethers";
 import FileUpload from "./Components/FileUpload";
 import { useEffect, useState } from "react";
+import { ThemeProvider } from "styled-components";
+
 import NavBar from "./Pages/NavBar";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
+import DataPage from "./Components/DataPage";
+import Share from "./Pages/Share";
+import Conversion from "./Pages/Conversion";
+import SingleComponent from "./Components/SingleComponent";
 
 function App() {
   // const [account, setAccount] = useState("");
@@ -84,13 +89,14 @@ function App() {
       </div> */}
       <Router>
         <NavBar />
-        <br />
-        <br />
-        <hr />
         <Routes>
           {/* account={account} contract={contract} */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/data" element={<DataPage />} />
+          <Route path="/code" element={<Share />} />
+          <Route path="/chat" element={<Conversion />} />
+          <Route path="/file/:url" element={<SingleComponent />} />
         </Routes>
       </Router>
     </>

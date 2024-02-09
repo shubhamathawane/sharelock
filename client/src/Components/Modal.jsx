@@ -35,28 +35,20 @@ const Modal = ({ contract, setOpenShare }) => {
               className="inputAddr"
               placeholder="Enter Address"
             />
+            <button
+              className="sharing btn btn-outline-success"
+              onClick={() => Sharing()}
+            >
+              Share
+            </button>
             <form action="" id="myForm">
               <select name="" id="selectNumber">
-                <option value="" className="addresss">
+                <option value="" className="address">
                   Peoples with Access
                 </option>
               </select>
             </form>
-            <div className="footer">
-              <button
-                onClick={() => {
-                  // setModalOpen(false);
-                  setOpenShare(false);
-                }}
-                id="cancelBtn"
-                className="btn"
-              >
-                Cancel
-              </button>
-              <button className="sharing btn" onClick={() => Sharing()}>
-                Share
-              </button>
-            </div>
+            <div className="footer"></div>
           </div>
         </div>
       </div>
