@@ -33,6 +33,7 @@ const Display = ({ contract, account, setOpenData }) => {
   };
 
   const getData = async () => {
+    
     try {
       let dataArray;
       if (email) {
@@ -88,7 +89,7 @@ const Display = ({ contract, account, setOpenData }) => {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]); // Empty dependency array to run the effect only once
+  }, []); // Empty dependency array to run the effect only once
 
   return (
     <div className="container mt-4">
